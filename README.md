@@ -5,6 +5,7 @@ Free public lookup at care.mooncatcrystals.com: type a crystal, see how to clean
 - `crystals.json`: the hand-edited care data (one entry per crystal). See its `_about` for field meanings and tone rules.
 - `build.py`: run after editing crystals.json. Writes `data.json` (what the pages load) and `review.html` (fact-check sheet).
 - `index.html`: the lookup. `chart.html`: printable chart.
+- Email links to the tool should use `?ref=list`: subscribers then see a direct "Open the Printable Chart" button instead of the chart sign-up (no second opt-in).
 - `functions/api/care-submit.js`: adds chart sign-ups to the Flodesk segment in `FLODESK_SEGMENT_CARE`.
 
 Look: loads the Crystal Skool dashboard's shared theme (https://dashboard.mooncatcrystals.com/mooncat-theme.css) so colors, fonts and light/dark stay in sync with Crystal Skool. Theme key "crystalskool-theme"; dashboard links pass ?theme=.

@@ -84,6 +84,7 @@
   .signup input:focus { border-color: var(--mc-line-hover); }
   .signup .hp { position: absolute; left: -9999px; top: -9999px; }
   .mc-btn { cursor: pointer; }
+  #chart-direct .mc-btn { display: inline-block; text-decoration: none; }
   .mc-btn:disabled { opacity: 0.55; cursor: not-allowed; }
   .form-msg { font-size: 13.5px; margin-top: 10px; min-height: 18px; }
   .form-msg.err { color: var(--bad); }
@@ -147,6 +148,15 @@
 
   <p class="reminder"><b>Common sense reminder:</b> Some crystals may look as good as candy, but they belong on your shelf, not in your snack bowl. Keep them away from pets and little ones who might try to chew on them.</p>
 
+  <!-- Shown instead of the sign-up when someone arrives from one of Kristen's
+       emails (?ref=list): they're already subscribers, so no second opt-in. -->
+  <div class="signup" id="chart-direct" hidden>
+    <span class="mc-eyebrow">Free printable</span>
+    <h3>Your crystal care <em class="mc-accent">chart</em></h3>
+    <p>Every crystal in one chart: what can get wet, what fades in the sun, and how to cleanse each one. Print it or save it as a PDF.</p>
+    <a class="mc-btn" href="/chart">Open the Printable Chart</a>
+  </div>
+
   <div class="signup" id="signup">
     <span class="mc-eyebrow">Free printable</span>
     <h3>Get the crystal care <em class="mc-accent">chart</em></h3>
@@ -177,6 +187,14 @@
   darkBtn.addEventListener("click", function () { setTheme("dark", true); });
   lightBtn.addEventListener("click", function () { setTheme("light", true); });
   setTheme(document.documentElement.getAttribute("data-theme") || "dark", false);
+})();
+(function () {
+  // Subscribers coming from an email link skip the chart sign-up.
+  var ref = new URLSearchParams(location.search).get("ref");
+  if (ref === "list") {
+    document.getElementById("signup").hidden = true;
+    document.getElementById("chart-direct").hidden = false;
+  }
 })();
 (function () {
   var POPULAR = ["Amethyst", "Rose Quartz", "Selenite", "Clear Quartz", "Black Tourmaline", "Citrine", "Labradorite", "Fluorite", "Pyrite", "Malachite"];
