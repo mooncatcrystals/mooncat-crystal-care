@@ -60,7 +60,15 @@
   .chip:focus-visible, .search input:focus-visible, .btn:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
   .browse { margin: 12px 0 0; text-align: center; }
   .browse summary { cursor: pointer; font-size: 14px; color: var(--text-soft); text-decoration: underline; display: inline-block; padding: 4px; }
-  .browse-list { columns: 3 140px; column-gap: 12px; text-align: left; margin-top: 12px; background: #fff; border-radius: 14px; padding: 14px 16px; }
+  .browse summary { list-style: none; }
+  .browse summary::-webkit-details-marker { display: none; }
+  .browse .caret::after { content: "▾"; text-decoration: none; display: inline-block; }
+  .browse[open] .caret::after { content: "▴"; }
+  .browse-panel { position: relative; margin-top: 12px; background: #fff; border-radius: 14px; padding: 40px 16px 14px; }
+  .browse-close { position: absolute; top: 6px; right: 8px; width: 36px; height: 36px; border: none; background: none; font-size: 26px; line-height: 1; color: var(--text-soft); cursor: pointer; border-radius: 50%; }
+  .browse-close:hover { background: var(--cream); color: var(--cream-text); }
+  .browse-close:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+  .browse-list { columns: 3 140px; column-gap: 12px; text-align: left; }
   .browse-list button { display: block; width: 100%; text-align: left; font: inherit; font-size: 14px; background: none; border: none; padding: 4px 2px; color: var(--cream-text); cursor: pointer; break-inside: avoid; }
   .browse-list button:hover { color: #7a5a86; text-decoration: underline; }
   .none { text-align: center; color: var(--text-soft); font-size: 14.5px; margin: 18px 0 0; }
@@ -128,9 +136,12 @@
       <ul class="suggest" id="suggest" role="listbox" hidden></ul>
     </div>
     <div class="chips" id="chips" aria-label="Popular crystals"></div>
-    <details class="browse">
-      <summary id="browse-label">Browse all crystals</summary>
-      <div class="browse-list" id="browse-list"></div>
+    <details class="browse" id="browse">
+      <summary><span id="browse-label">Browse all crystals</span> <span class="caret" aria-hidden="true"></span></summary>
+      <div class="browse-panel">
+        <button type="button" class="browse-close" id="browse-close" aria-label="Close the crystal list">&times;</button>
+        <div class="browse-list" id="browse-list"></div>
+      </div>
     </details>
     <p class="none" id="none" hidden></p>
 
@@ -289,12 +300,17 @@
       b.addEventListener("click", function () { show(c); });
       chips.appendChild(b);
     });
-    // Browse-all list, A to Z.
+    // Browse-all list, A to Z. Closes with the × or when a crystal is picked.
+    var browse = document.getElementById("browse");
+    document.getElementById("browse-close").addEventListener("click", function () {
+      browse.open = false;
+      browse.querySelector("summary").focus();
+    });
     var list = document.getElementById("browse-list");
     crystals.slice().sort(function (a, b) { return a.name.localeCompare(b.name); }).forEach(function (c) {
       var b = document.createElement("button");
       b.type = "button"; b.textContent = c.name;
-      b.addEventListener("click", function () { show(c); });
+      b.addEventListener("click", function () { browse.open = false; show(c); });
       list.appendChild(b);
     });
     document.getElementById("browse-label").textContent = "Browse all " + crystals.length + " crystals";
