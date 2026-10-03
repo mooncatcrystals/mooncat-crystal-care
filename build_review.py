@@ -1,14 +1,11 @@
 # Builds review.html from crystals.json so Kristen can fact-check every entry.
 import json, html
 data = json.load(open("crystals.json"))["crystals"]
-POROUS_NO_SMOKE = {"Turquoise", "Howlite", "Amber", "Opal", "Chrysocolla"}
+CLEANSE_ALL = ["Sound (singing bowl, bell, chime)", "Smoke (sage, palo santo, incense)", "Intention (hold it, breathe slowly, picture it clearing)"]
 
 def cleanse(c):
-    m = []
-    if not c.get("noSelenitePlate"): m.append("Selenite plate")
-    m += ["Moonlight", "Sound (singing bowl, bell, chime)"]
-    if c["name"] not in POROUS_NO_SMOKE: m.append("Smoke (sage, palo santo, incense)")
-    return m
+    # Moonlight is for charging, not cleansing (Kristen). Water is never a cleanse.
+    return ([] if c.get("noSelenitePlate") else ["Selenite plate"]) + CLEANSE_ALL
 
 WATER = {"rinse": "💧 Quick rinse OK (to wash off dust)", "dry": "🚫 Keep dry"}
 SUN = {"safe": "Sun-safe", "fades": "☀️ Can fade in sun"}
