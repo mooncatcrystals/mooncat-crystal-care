@@ -7,6 +7,8 @@ Free public lookup at care.mooncatcrystals.com: type a crystal, see how to clean
 - `index.html`: the lookup. `chart.html`: printable chart.
 - `functions/api/care-submit.js`: adds chart sign-ups to the Flodesk segment in `FLODESK_SEGMENT_CARE`.
 
+Look: loads the Crystal Skool dashboard's shared theme (https://dashboard.mooncatcrystals.com/mooncat-theme.css) so colors, fonts and light/dark stay in sync with Crystal Skool. Theme key "crystalskool-theme"; dashboard links pass ?theme=.
+
 Hosting: Cloudflare Pages (no build command, output `/`), env vars `FLODESK_API_KEY` (secret) and `FLODESK_SEGMENT_CARE`.
 
 Care rules: water is only for cleaning off dust, and only for quartz-family stones; cleansing = selenite plate (several hours or overnight), sound, smoke, intention (never moonlight or water). Calm tone; handling tips, never scare copy. Universal note is a light 'Common sense reminder', not a lecture. Lean cautious when sources disagree.

@@ -6,6 +6,7 @@
 <title>Crystal Care Guide | Mooncat Crystals</title>
 <meta name="description" content="Can your crystal get wet? Will it fade in the sun? Look up any crystal and see exactly how to clean, store and cleanse it.">
 <link rel="icon" href="https://www.mooncatcrystals.com/cdn/shop/files/Untitled_design_4.avif?v=1771447662&width=96">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <script>
   // Light/dark matches the Crystal Skool dashboard: same "crystalskool-theme"
   // key and default. The dashboard links here with ?theme=light|dark because
@@ -19,145 +20,90 @@
   })();
 </script>
 <style>
-  /* Same palette and type as the Find Your Crystal quiz (dark), and the
-     Crystal Skool dashboard's light theme. */
-  :root {
-    --cream: #ece2da;
-    --cream-text: #1c1c1c;
-    --tan: #e5cbb3;
-    --pink: #eca6ef;
-    --pink-border: #e1aae9;
-    --purple: #b999c4;
-    --text-soft: #5c534c;
-    --ok: #3f6e4a;
-    --ok-bg: #e3eee4;
-    --no: #9b3b2e;
-    --no-bg: #f6e3de;
-    --mid: #8a6420;
-    --mid-bg: #f5ead2;
-    --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.55);
-    --page-bg: #000000;
-    --page-ink: #e5cbb3;
-    --page-muted: rgba(229, 203, 179, 0.75);
-    --card: #ece2da;
-    --box: #ffffff;
-    --box-border: transparent;
-    --field: #ffffff;
-    --toggle-bg: #ece2da;
-  }
-  [data-theme="light"] {
-    --page-bg: #f7f1ea;
-    --page-ink: #1c1610;
-    --page-muted: rgba(28, 22, 16, 0.65);
-    --card: #ffffff;
-    --box: #f7f1ea;
-    --box-border: #ddd0c4;
-    --field: #ffffff;
-    --toggle-bg: #ffffff;
-    --shadow: 0 18px 40px -24px rgba(28, 22, 16, 0.25);
-  }
+  /* Crystal Skool look: colors, fonts (Fraunces + Figtree), pill buttons and
+     light/dark all come from the dashboard's shared mooncat-theme.css, linked
+     below so the two stay in sync. This block is layout only, using its
+     --mc-* variables. */
   * { box-sizing: border-box; }
-  @font-face {
-    font-family: 'Merriweather';
-    src: url('https://www.mooncatcrystals.com/cdn/fonts/merriweather/merriweather_n4.349a72bc63b970a8b7f00dc33f5bda2ec52f79cc.woff2') format('woff2');
-    font-weight: 400; font-style: normal; font-display: swap;
-  }
-  body {
-    margin: 0; background: var(--page-bg); color: var(--page-ink);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    min-height: 100vh; display: flex; justify-content: center; padding: 36px 16px 70px;
-  }
-  h1, h2, h3 { font-family: 'Merriweather', Georgia, serif; font-weight: 400; margin: 0; }
-  .wrap { width: 100%; max-width: 620px; }
-  .brand { text-align: center; margin-bottom: 26px; }
-  .brand img { height: 62px; width: auto; }
-  .card { background: var(--card); color: var(--cream-text); border-radius: 20px; box-shadow: var(--shadow); padding: 38px 32px; }
-  .eyebrow { text-align: center; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--purple); font-weight: 700; margin-bottom: 10px; }
-  h1 { text-align: center; font-size: 30px; line-height: 1.25; margin-bottom: 12px; }
-  .intro { text-align: center; color: var(--text-soft); font-size: 15px; line-height: 1.6; margin: 0 auto 24px; max-width: 460px; }
+  body { margin: 0; min-height: 100vh; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 64px 20px 100px; }
+  .page-header { text-align: center; padding-bottom: 28px; }
+  .page-header h1 { margin: 0 0 12px; }
+  .subtitle { font-size: 15px; color: var(--mc-muted); max-width: 520px; margin: 0 auto; line-height: 1.7; }
 
-  .search { position: relative; }
-  .search input {
-    width: 100%; font: inherit; font-size: 16px; padding: 15px 18px; border-radius: 14px;
-    border: 2px solid rgba(28, 28, 28, 0.15); background: var(--field); color: var(--cream-text);
-  }
-  .search input:focus { outline: none; border-color: var(--pink); }
-  .suggest { list-style: none; margin: 6px 0 0; padding: 6px; background: #fff; border-radius: 14px; box-shadow: 0 12px 30px -12px rgba(0,0,0,0.25); position: absolute; left: 0; right: 0; z-index: 5; max-height: 320px; overflow-y: auto; }
-  .suggest li { padding: 10px 12px; border-radius: 10px; cursor: pointer; font-size: 15px; }
-  .suggest li .alias { color: var(--text-soft); font-size: 13px; }
-  .suggest li[aria-selected="true"], .suggest li:hover { background: var(--cream); }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0 4px; }
-  .chip { font: inherit; font-size: 13.5px; border: 1px solid rgba(28,28,28,0.15); background: var(--field); color: var(--cream-text); border-radius: 999px; padding: 7px 13px; cursor: pointer; }
-  .chip:hover { border-color: var(--purple); }
-  .chip:focus-visible, .search input:focus-visible, .btn:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+  .search { position: relative; max-width: 560px; margin: 0 auto; }
+  .search-input { width: 100%; font-size: 15.5px; border: 1px solid var(--mc-line); outline: none; transition: border-color 0.2s; }
+  .suggest { list-style: none; margin: 6px 0 0; padding: 6px; background: var(--mc-surface); border: 1px solid var(--mc-line); border-radius: 16px; box-shadow: 0 16px 40px -16px rgba(0,0,0,0.45); position: absolute; left: 0; right: 0; z-index: 5; max-height: 320px; overflow-y: auto; }
+  .suggest li { padding: 10px 14px; border-radius: 10px; cursor: pointer; font-size: 15px; color: var(--mc-heading); }
+  .suggest li .alias { color: var(--mc-muted); font-size: 13px; }
+  .suggest li[aria-selected="true"], .suggest li:hover { background: var(--mc-surface-hover); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 620px; margin: 16px auto 4px; }
+  .chip { all: unset; box-sizing: border-box; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--mc-text); background: var(--chip-bg); border: 1px solid var(--chip-border); border-radius: 999px; padding: 6px 13px; transition: all 0.15s ease; }
+  .chip:focus-visible, .search-input:focus-visible, .mc-btn:focus-visible { outline: 2px solid var(--mc-accent); outline-offset: 2px; }
+  .none { text-align: center; color: var(--mc-muted); font-size: 14.5px; margin: 18px 0 0; }
+
   .browse { margin: 12px 0 0; text-align: center; }
-  .browse summary { cursor: pointer; font-size: 14px; color: var(--text-soft); text-decoration: underline; display: inline-block; padding: 4px; }
-  .browse summary { list-style: none; }
+  .browse summary { list-style: none; cursor: pointer; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mc-accent); display: inline-block; padding: 6px; }
   .browse summary::-webkit-details-marker { display: none; }
-  .browse .caret::after { content: "▾"; text-decoration: none; display: inline-block; }
+  .browse .caret::after { content: "▾"; display: inline-block; }
   .browse[open] .caret::after { content: "▴"; }
-  .browse-panel { position: relative; margin-top: 12px; background: var(--box); border: 1px solid var(--box-border); border-radius: 14px; padding: 40px 16px 14px; }
-  .browse-close { position: absolute; top: 6px; right: 8px; width: 36px; height: 36px; border: none; background: none; font-size: 26px; line-height: 1; color: var(--text-soft); cursor: pointer; border-radius: 50%; }
-  .browse-close:hover { background: var(--cream); color: var(--cream-text); }
-  .browse-close:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+  .browse-panel { position: relative; margin-top: 12px; background: var(--mc-surface); border: 1px solid var(--mc-line); border-radius: 18px; padding: 44px 18px 16px; }
+  .browse-close { all: unset; box-sizing: border-box; position: absolute; top: 8px; right: 10px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 26px; line-height: 1; color: var(--mc-muted); cursor: pointer; border-radius: 50%; }
+  .browse-close:hover { background: var(--mc-surface-hover); color: var(--mc-heading); }
+  .browse-close:focus-visible { outline: 2px solid var(--mc-accent); }
   .browse-list { columns: 3 140px; column-gap: 12px; text-align: left; }
-  .browse-list button { display: block; width: 100%; text-align: left; font: inherit; font-size: 14px; background: none; border: none; padding: 4px 2px; color: var(--cream-text); cursor: pointer; break-inside: avoid; }
-  .browse-list button:hover { color: #7a5a86; text-decoration: underline; }
-  .none { text-align: center; color: var(--text-soft); font-size: 14.5px; margin: 18px 0 0; }
+  .browse-list button { all: unset; display: block; width: 100%; box-sizing: border-box; font-size: 14.5px; padding: 4px 2px; color: var(--mc-text); cursor: pointer; break-inside: avoid; }
+  .browse-list button:hover, .browse-list button:focus-visible { color: var(--mc-accent); text-decoration: underline; }
 
-  .result { margin-top: 28px; }
-  .result h2 { text-align: center; font-size: 30px; margin-bottom: 6px; }
-  .hardness { text-align: center; color: var(--text-soft); font-size: 13px; margin-bottom: 20px; }
+  .result { margin-top: 32px; background: var(--mc-surface); border: 1px solid var(--mc-line); border-radius: 18px; padding: 30px 26px; }
+  .result .mc-eyebrow { text-align: center; }
+  .result h2 { text-align: center; font-size: clamp(28px, 4.5vw, 36px); font-weight: 300; margin: 0 0 4px; }
+  .hardness { text-align: center; color: var(--mc-muted); font-size: 13px; margin-bottom: 22px; }
   .badges { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 18px; }
-  .badge { border-radius: 12px; padding: 12px 8px; text-align: center; font-size: 13.5px; font-weight: 600; line-height: 1.35; }
+  .badge { border-radius: 14px; padding: 12px 8px; text-align: center; font-size: 13.5px; font-weight: 600; line-height: 1.35; border: 1px solid var(--mc-line); background: var(--entry-bg); color: var(--mc-heading); }
   .badge span { display: block; font-size: 20px; margin-bottom: 4px; }
-  .badge.ok { background: var(--ok-bg); color: var(--ok); }
-  .badge.no { background: var(--no-bg); color: var(--no); }
-  .badge.mid { background: var(--mid-bg); color: var(--mid); }
-  .box { background: var(--box); border: 1px solid var(--box-border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
-  .box strong { display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-soft); margin-bottom: 6px; }
-  .box p { margin: 0; font-size: 15px; line-height: 1.6; }
-  .warn-box { border: 2px solid var(--mid-bg); }
-  .box ul { margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.7; }
-  .shop-btn {
-    display: block; text-align: center; text-decoration: none; background: var(--pink); border: 1px solid var(--pink-border);
-    color: #000; padding: 16px 20px; border-radius: 24px; font-weight: 600; font-size: 15px; letter-spacing: 0.5px; text-transform: uppercase;
-    margin: 18px 0 10px; box-shadow: 0 14px 30px -12px rgba(236, 166, 239, 0.65);
-  }
-  .shop-btn:hover { background: #f2bcf4; }
+  .badge.ok { color: var(--good); border-color: color-mix(in srgb, var(--good) 40%, transparent); }
+  .badge.no { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, transparent); }
+  .badge.mid { color: var(--mc-accent); border-color: color-mix(in srgb, var(--mc-accent) 40%, transparent); }
+  .section { border-top: 1px solid var(--mc-line); padding: 16px 0 2px; }
+  .section .mc-eyebrow { margin-bottom: 6px; text-align: left; }
+  .section p { margin: 0 0 12px; font-size: 15px; line-height: 1.65; }
+  .section ul { margin: 0 0 12px; padding-left: 20px; font-size: 15px; line-height: 1.75; }
+  .result .mc-btn { display: block; text-align: center; text-decoration: none; margin: 18px auto 0; max-width: 340px; }
 
-  .habits { margin-top: 26px; padding-top: 20px; border-top: 1px solid rgba(28,28,28,0.12); font-size: 14px; line-height: 1.6; color: var(--text-soft); }
-  .habits b { color: var(--cream-text); }
+  .reminder { margin: 26px auto 0; max-width: 560px; text-align: center; font-size: 14px; line-height: 1.65; color: var(--mc-muted); }
+  .reminder b { color: var(--mc-heading); font-weight: 600; }
 
-  .signup { background: var(--box); border: 1px solid var(--box-border); border-radius: 14px; padding: 20px; margin-top: 22px; }
-  .signup h3 { font-size: 19px; margin-bottom: 6px; }
-  .signup p { font-size: 14.5px; line-height: 1.55; margin: 0 0 12px; color: var(--cream-text); }
-  .signup form { display: flex; flex-direction: column; gap: 8px; }
-  .signup input[type="text"], .signup input[type="email"] { font: inherit; font-size: 15px; padding: 12px 14px; border-radius: 10px; border: 2px solid rgba(28,28,28,0.15); background: var(--cream); color: var(--cream-text); }
-  .signup input:focus { outline: none; border-color: var(--pink); }
+  .signup { margin-top: 30px; background: var(--mc-surface); border: 1px solid var(--mc-line); border-radius: 18px; padding: 26px 24px; text-align: center; }
+  .signup h3 { font-size: 24px; font-weight: 300; margin: 0 0 8px; }
+  .signup p { font-size: 14.5px; line-height: 1.6; color: var(--mc-muted); margin: 0 auto 16px; max-width: 440px; }
+  .signup form { display: flex; flex-direction: column; gap: 10px; max-width: 380px; margin: 0 auto; }
+  .signup input[type="text"], .signup input[type="email"] { font-size: 15px; padding: 12px 18px; border-radius: 999px; border: 1px solid var(--mc-line); background: var(--input-bg); color: var(--mc-heading); outline: none; }
+  .signup input::placeholder { color: var(--mc-muted); }
+  .signup input:focus { border-color: var(--mc-line-hover); }
   .signup .hp { position: absolute; left: -9999px; top: -9999px; }
-  .btn { font: inherit; font-weight: 700; font-size: 14.5px; background: var(--purple); color: #fff; border: none; border-radius: 10px; padding: 13px 18px; cursor: pointer; }
-  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
-  .form-msg { font-size: 13.5px; margin-top: 8px; min-height: 18px; }
-  .form-msg.err { color: var(--no); }
-  .form-msg.ok { color: var(--ok); font-weight: 600; }
+  .mc-btn { cursor: pointer; }
+  .mc-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .form-msg { font-size: 13.5px; margin-top: 10px; min-height: 18px; }
+  .form-msg.err { color: var(--bad); }
+  .form-msg.ok { color: var(--good); font-weight: 600; }
 
-  .disclaimer { margin-top: 26px; font-size: 12.5px; line-height: 1.6; color: var(--page-muted); text-align: center; }
-  .disclaimer a { color: var(--page-ink); }
+  .disclaimer { margin-top: 30px; font-size: 12.5px; line-height: 1.65; color: var(--mc-muted); text-align: center; }
+  .disclaimer a { color: var(--mc-accent); }
 
-  /* Same moon/sun toggle as the Crystal Skool dashboard. */
-  .theme-toggle { position: fixed; top: 16px; right: 16px; z-index: 20; display: flex; gap: 4px; background: var(--toggle-bg); border: 1px solid rgba(28, 22, 16, 0.12); border-radius: 999px; padding: 5px; }
-  .theme-toggle button { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; color: rgba(28, 22, 16, 0.65); }
-  .theme-toggle button.active { background: var(--pink); color: #1c1610; }
-  .theme-toggle button:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+  .theme-toggle { position: fixed; top: 20px; right: 20px; z-index: 20; display: flex; align-items: center; gap: 4px; border: 1px solid; border-radius: 999px; padding: 5px; }
+  .theme-toggle button { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; transition: all 0.2s ease; }
+  .theme-toggle button:focus-visible { outline: 2px solid var(--mc-accent); }
   .theme-toggle svg { width: 15px; height: 15px; }
   [hidden] { display: none !important; }
-  @media (max-width: 480px) {
-    .card { padding: 30px 20px; border-radius: 18px; }
-    h1, .result h2 { font-size: 25px; }
+  @media (max-width: 520px) {
+    .wrap { padding: 72px 16px 80px; }
+    .result { padding: 24px 18px; }
     .badge { font-size: 12.5px; padding: 10px 4px; }
   }
 </style>
+<link rel="stylesheet" href="https://dashboard.mooncatcrystals.com/mooncat-theme.css">
 </head>
 <body>
 <div class="theme-toggle" role="group" aria-label="Light or dark mode">
@@ -165,56 +111,53 @@
   <button type="button" id="btn-light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
 </div>
 <div class="wrap">
-  <div class="brand">
-    <a href="https://www.mooncatcrystals.com"><img src="https://www.mooncatcrystals.com/cdn/shop/files/logo-mooncat.png?v=1729612271&width=200" alt="Mooncat Crystals"></a>
+  <div class="page-header">
+    <a class="mc-logo" href="https://www.mooncatcrystals.com"><img src="https://www.mooncatcrystals.com/cdn/shop/files/logo-mooncat.png?width=255" alt="Mooncat Crystals" width="72" height="72"></a>
+    <span class="mc-eyebrow">Crystal Care Guide</span>
+    <h1>Can my crystal get <em>wet?</em></h1>
+    <p class="subtitle">Look up any crystal to see how to clean it, whether it's safe in water or sun, how fragile it is, and how to cleanse it.</p>
   </div>
 
-  <div class="card">
-    <div class="eyebrow">Crystal Care Guide</div>
-    <h1>Can my crystal get wet?</h1>
-    <p class="intro">Look up any crystal to see how to clean it, whether it's safe in water or sun, how fragile it is, and how to cleanse it.</p>
-
-    <div class="search" role="search">
-      <input id="q" type="search" autocomplete="off" placeholder="Type a crystal, like amethyst or apache tears" aria-label="Search for a crystal" aria-autocomplete="list" aria-controls="suggest">
-      <ul class="suggest" id="suggest" role="listbox" hidden></ul>
+  <div class="search" role="search">
+    <input id="q" class="search-input" type="search" autocomplete="off" placeholder="Type a crystal, like amethyst or apache tears" aria-label="Search for a crystal" aria-autocomplete="list" aria-controls="suggest">
+    <ul class="suggest" id="suggest" role="listbox" hidden></ul>
+  </div>
+  <div class="chips" id="chips" aria-label="Popular crystals"></div>
+  <details class="browse" id="browse">
+    <summary><span id="browse-label">Browse all crystals</span> <span class="caret" aria-hidden="true"></span></summary>
+    <div class="browse-panel">
+      <button type="button" class="browse-close" id="browse-close" aria-label="Close the crystal list">&times;</button>
+      <div class="browse-list" id="browse-list"></div>
     </div>
-    <div class="chips" id="chips" aria-label="Popular crystals"></div>
-    <details class="browse" id="browse">
-      <summary><span id="browse-label">Browse all crystals</span> <span class="caret" aria-hidden="true"></span></summary>
-      <div class="browse-panel">
-        <button type="button" class="browse-close" id="browse-close" aria-label="Close the crystal list">&times;</button>
-        <div class="browse-list" id="browse-list"></div>
-      </div>
-    </details>
-    <p class="none" id="none" hidden></p>
+  </details>
+  <p class="none" id="none" hidden></p>
 
-    <div class="result" id="result" hidden aria-live="polite">
-      <h2 id="r-name"></h2>
-      <div class="hardness" id="r-hardness"></div>
-      <div class="badges" id="r-badges"></div>
-      <div class="box"><strong>Cleaning</strong><p id="r-cleaning"></p></div>
-      <div class="box"><strong>Good to know</strong><p id="r-note"></p></div>
-      <div class="box" id="r-tip-box" hidden><strong>Handling tip</strong><p id="r-tip"></p></div>
-      <div class="box warn-box" id="r-warn-box" hidden><strong>Please note</strong><p id="r-warn"></p></div>
-      <div class="box"><strong>To cleanse it</strong><ul id="r-cleanse"></ul></div>
-      <a class="shop-btn" id="r-shop" href="#" target="_blank" rel="noopener"></a>
-    </div>
+  <div class="result" id="result" hidden aria-live="polite">
+    <span class="mc-eyebrow">How to care for</span>
+    <h2 id="r-name"></h2>
+    <div class="hardness" id="r-hardness"></div>
+    <div class="badges" id="r-badges"></div>
+    <div class="section"><span class="mc-eyebrow">Cleaning</span><p id="r-cleaning"></p></div>
+    <div class="section"><span class="mc-eyebrow">Good to know</span><p id="r-note"></p></div>
+    <div class="section" id="r-tip-box" hidden><span class="mc-eyebrow">Handling tip</span><p id="r-tip"></p></div>
+    <div class="section" id="r-warn-box" hidden><span class="mc-eyebrow">Please note</span><p id="r-warn"></p></div>
+    <div class="section"><span class="mc-eyebrow">To cleanse it</span><ul id="r-cleanse"></ul></div>
+    <a class="mc-btn" id="r-shop" href="#" target="_blank" rel="noopener"></a>
+  </div>
 
-    <div class="habits">
-      <b>Common sense reminder:</b> Some crystals may look as good as candy, but they belong on your shelf, not in your snack bowl. Keep them away from pets and little ones who might try to chew on them.
-    </div>
+  <p class="reminder"><b>Common sense reminder:</b> Some crystals may look as good as candy, but they belong on your shelf, not in your snack bowl. Keep them away from pets and little ones who might try to chew on them.</p>
 
-    <div class="signup" id="signup">
-      <h3>Get the printable care chart</h3>
-      <p>Every crystal on one page: what can get wet, what fades in the sun, and how to cleanse each one. We'll email it to you.</p>
-      <form id="signup-form" novalidate>
-        <input type="text" id="s-name" autocomplete="given-name" placeholder="First name" required>
-        <input type="email" id="s-email" autocomplete="email" placeholder="you@email.com" required>
-        <input type="text" id="s-hp" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn" type="submit" id="s-btn">Email Me the Chart</button>
-      </form>
-      <div class="form-msg" id="s-msg" role="status"></div>
-    </div>
+  <div class="signup" id="signup">
+    <span class="mc-eyebrow">Free printable</span>
+    <h3>Get the crystal care <em class="mc-accent">chart</em></h3>
+    <p>Every crystal on one page: what can get wet, what fades in the sun, and how to cleanse each one. We'll email it to you.</p>
+    <form id="signup-form" novalidate>
+      <input type="text" id="s-name" autocomplete="given-name" placeholder="First name" required>
+      <input type="email" id="s-email" autocomplete="email" placeholder="you@email.com" required>
+      <input type="text" id="s-hp" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="mc-btn" type="submit" id="s-btn">Email Me the Chart</button>
+    </form>
+    <div class="form-msg" id="s-msg" role="status"></div>
   </div>
 
   <p class="disclaimer">This guide is shared to the best of our knowledge, and we lean cautious when sources disagree. Crystals vary, especially treated, dyed or coated pieces, so use your own judgment. Mooncat Crystals isn't responsible for damage to crystals or for how they're used. Not medical advice. <a href="https://quiz.mooncatcrystals.com">Not sure which crystal you need? Take the quiz.</a></p>
