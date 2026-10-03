@@ -58,6 +58,11 @@
   .chip { font: inherit; font-size: 13.5px; border: 1px solid rgba(28,28,28,0.15); background: #fff; color: var(--cream-text); border-radius: 999px; padding: 7px 13px; cursor: pointer; }
   .chip:hover { border-color: var(--purple); }
   .chip:focus-visible, .search input:focus-visible, .btn:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+  .browse { margin: 12px 0 0; text-align: center; }
+  .browse summary { cursor: pointer; font-size: 14px; color: var(--text-soft); text-decoration: underline; display: inline-block; padding: 4px; }
+  .browse-list { columns: 3 140px; column-gap: 12px; text-align: left; margin-top: 12px; background: #fff; border-radius: 14px; padding: 14px 16px; }
+  .browse-list button { display: block; width: 100%; text-align: left; font: inherit; font-size: 14px; background: none; border: none; padding: 4px 2px; color: var(--cream-text); cursor: pointer; break-inside: avoid; }
+  .browse-list button:hover { color: #7a5a86; text-decoration: underline; }
   .none { text-align: center; color: var(--text-soft); font-size: 14.5px; margin: 18px 0 0; }
 
   .result { margin-top: 28px; }
@@ -123,6 +128,10 @@
       <ul class="suggest" id="suggest" role="listbox" hidden></ul>
     </div>
     <div class="chips" id="chips" aria-label="Popular crystals"></div>
+    <details class="browse">
+      <summary id="browse-label">Browse all crystals</summary>
+      <div class="browse-list" id="browse-list"></div>
+    </details>
     <p class="none" id="none" hidden></p>
 
     <div class="result" id="result" hidden aria-live="polite">
@@ -280,6 +289,15 @@
       b.addEventListener("click", function () { show(c); });
       chips.appendChild(b);
     });
+    // Browse-all list, A to Z.
+    var list = document.getElementById("browse-list");
+    crystals.slice().sort(function (a, b) { return a.name.localeCompare(b.name); }).forEach(function (c) {
+      var b = document.createElement("button");
+      b.type = "button"; b.textContent = c.name;
+      b.addEventListener("click", function () { show(c); });
+      list.appendChild(b);
+    });
+    document.getElementById("browse-label").textContent = "Browse all " + crystals.length + " crystals";
     // Shareable links: ?c=rose-quartz opens that crystal.
     var want = new URLSearchParams(location.search).get("c");
     if (want) {
