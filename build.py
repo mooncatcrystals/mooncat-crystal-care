@@ -32,7 +32,7 @@ for c in sorted(data, key=lambda c: (c["water"] != "rinse", c["name"])):
         html.escape(c["name"]), html.escape(", ".join(c["aliases"])),
         WATER[c["water"]], html.escape(cleaning(c)), SUN[c["sun"]], FRAG[c["fragility"]], c["hardness"],
         html.escape(c["note"]),
-        "<div class=warn>⚠️ " + html.escape(c["warn"]) + "</div>" if c.get("warn") else "",
+        ("<div class=warn>⚠️ " + html.escape(c["warn"]) + "</div>" if c.get("warn") else "") + ("<div class=al><b>Handling tip:</b> " + html.escape(c["tip"]) + "</div>" if c.get("tip") else ""),
         "<br>".join(cleanse(c)),
         ("collections/" + c["shop"]) if c["shop"] else "<span class=al>store search</span>"))
 page = """<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">

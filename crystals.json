@@ -1,5 +1,5 @@
 {
- "_about": "Care data for the Mooncat crystal care lookup. water: rinse = a quick rinse under cool water is fine (never soak, never salt or hot water); dry = keep it dry. sun: safe | fades. fragility: sturdy | careful | delicate. shop: a mooncatcrystals.com collection handle, or null to fall back to a store search. When in doubt, err on the side of caution (Kristen's rule). No scary per-stone toxicity warnings for everyday stones: a calm, universal 'good crystal habits' note covers it (not in your mouth, away from pets/kids who chew, wash hands after raw pieces). Add a 'warn' field ONLY for genuinely hazardous minerals (e.g. stibnite, crocoite, cinnabar, realgar, orpiment, galena, radioactive torbernite/autunite).",
+ "_about": "Care data for the Mooncat crystal care lookup. water: rinse = a quick rinse under cool water is fine (never soak, never salt or hot water); dry = keep it dry. sun: safe | fades. fragility: sturdy | careful | delicate. shop: a mooncatcrystals.com collection handle, or null to fall back to a store search. When in doubt, err on the side of caution (Kristen's rule). Tone: calm, never scary. A universal 'good crystal habits' note covers everyday stones (not in your mouth, away from pets/kids who chew, wash hands after raw pieces). 'tip' = a calm per-stone handling tip for stones that need a bit more care (e.g. copper minerals). Reserve a stronger 'warn' ONLY for genuinely hazardous minerals (e.g. stibnite, crocoite, cinnabar, realgar, orpiment, galena, radioactive torbernite/autunite).",
  "crystals": [
   {
    "name": "Amethyst",
@@ -370,7 +370,8 @@
    "fragility": "careful",
    "hardness": "6-6.5",
    "note": "Keep Pyrite dry. Water and humidity can make it rust or tarnish, so don't keep it in a bathroom. It's brittle and can crack if dropped.",
-   "shop": "pyrite"
+   "shop": "pyrite",
+   "tip": "Pyrite can break down when wet, so keep it out of drinking water, and wash your hands after handling raw pieces."
   },
   {
    "name": "Hematite",
@@ -390,7 +391,8 @@
    "fragility": "delicate",
    "hardness": "3.5-4",
    "note": "Soft and scratches easily. Keep it dry and away from household cleaners.",
-   "shop": "malachite"
+   "shop": "malachite",
+   "tip": "Malachite is a copper mineral. Polished pieces are fine to hold; just wash your hands after handling raw pieces and keep it out of drinking water."
   },
   {
    "name": "Celestite",
@@ -549,7 +551,8 @@
    "fragility": "delicate",
    "hardness": "2-4",
    "note": "Soft and can dry out and crack in heat or strong sun. Keep it cool, dry and out of the sun.",
-   "shop": null
+   "shop": null,
+   "tip": "Chrysocolla is a copper mineral. Polished pieces are fine to hold; just wash your hands after handling raw pieces and keep it out of drinking water."
   },
   {
    "name": "Turquoise",
