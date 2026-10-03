@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Care Chart | Mooncat Crystals</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="https://www.mooncatcrystals.com/cdn/shop/files/Untitled_design_4.avif?v=1771447662&width=96">
+<style>
+  /* The printable chart people get after signing up. Prints on letter or A4. */
+  :root { --ink: #1c1c1c; --soft: #5c534c; --line: #ddd2c8; --ok: #3f6e4a; --no: #9b3b2e; --mid: #8a6420; --bg: #faf6f2; }
+  * { box-sizing: border-box; }
+  @font-face {
+    font-family: 'Merriweather';
+    src: url('https://www.mooncatcrystals.com/cdn/fonts/merriweather/merriweather_n4.349a72bc63b970a8b7f00dc33f5bda2ec52f79cc.woff2') format('woff2');
+    font-display: swap;
+  }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 13px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; padding: 28px 16px 48px; }
+  .page { max-width: 900px; margin: 0 auto; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+  header img { height: 46px; }
+  h1 { font-family: 'Merriweather', Georgia, serif; font-weight: 400; font-size: 26px; margin: 0; }
+  .sub { color: var(--soft); margin: 0 0 16px; }
+  .print { font: inherit; font-weight: 700; background: #b999c4; color: #fff; border: none; border-radius: 8px; padding: 9px 16px; cursor: pointer; margin-bottom: 16px; }
+  .key { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--soft); font-size: 12px; margin-bottom: 14px; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 640px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--soft); }
+  td.name { font-weight: 700; white-space: nowrap; }
+  .ok { color: var(--ok); } .no { color: var(--no); } .mid { color: var(--mid); }
+  h2 { font-family: 'Merriweather', Georgia, serif; font-weight: 400; font-size: 17px; margin: 22px 0 6px; }
+  .foot { margin-top: 22px; color: var(--soft); font-size: 11.5px; line-height: 1.55; }
+  .foot b { color: var(--ink); }
+  @media print {
+    body { background: #fff; padding: 0; font-size: 10.5px; }
+    .print { display: none; }
+    .scroll { overflow: visible; }
+    table { min-width: 0; }
+    tr { break-inside: avoid; }
+    @page { margin: 12mm; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <img src="https://www.mooncatcrystals.com/cdn/shop/files/logo-mooncat.png?v=1729612271&width=200" alt="Mooncat Crystals">
+    <h1>Crystal Care Chart</h1>
+  </header>
+  <p class="sub">How to clean, store and cleanse your crystals, at a glance. Look up any single crystal at <b>care.mooncatcrystals.com</b>.</p>
+  <button class="print" type="button" onclick="window.print()">Print or save as PDF</button>
+  <div class="key">
+    <span><b class="ok">💧 Rinse OK</b> = a quick rinse under cool water is fine for cleaning off dust</span>
+    <span><b class="no">🚫 Dry</b> = keep it dry</span>
+    <span><b class="no">☀️ Fades</b> = keep out of direct sun</span>
+  </div>
+  <div id="tables"></div>
+  <p class="foot">
+    <b>To cleanse any crystal:</b> a selenite plate (several hours or overnight; not for selenite itself), sound (a singing bowl, bell or chime), smoke (sage, palo santo or incense), or intention (hold it, breathe slowly, and picture it clearing).<br>
+    <b>Good crystal habits:</b> crystals aren't for chewing. Keep them out of your mouth, keep them away from pets and little ones who might chew them, and wash your hands after handling raw pieces.<br>
+    Shared to the best of our knowledge; we lean cautious when sources disagree. Crystals vary, especially treated, dyed or coated pieces, so use your own judgment. Mooncat Crystals isn't responsible for damage to crystals or for how they're used. Not medical advice. · mooncatcrystals.com
+  </p>
+</div>
+<script>
+fetch("data.json").then(function (r) { return r.json(); }).then(function (data) {
+  var groups = [
+    { title: "Quick rinse is fine", test: function (c) { return c.water === "rinse"; } },
+    { title: "Keep dry", test: function (c) { return c.water !== "rinse"; } }
+  ];
+  var FRAG = { sturdy: '<span class="ok">Sturdy</span>', careful: '<span class="mid">Handle with care</span>', delicate: '<span class="no">Delicate</span>' };
+  function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+  var out = "";
+  groups.forEach(function (g) {
+    out += "<h2>" + g.title + "</h2><div class=scroll><table><tr><th>Crystal</th><th>Water</th><th>Sun</th><th>Handling</th><th>Good to know</th></tr>";
+    data.crystals.filter(g.test).forEach(function (c) {
+      out += "<tr><td class=name>" + esc(c.name) + "</td>" +
+        "<td>" + (c.water === "rinse" ? '<span class="ok">💧 Rinse OK</span>' : '<span class="no">🚫 Dry</span>') + "</td>" +
+        "<td>" + (c.sun === "safe" ? '<span class="ok">Sun-safe</span>' : '<span class="no">☀️ Fades</span>') + "</td>" +
+        "<td>" + FRAG[c.fragility] + "</td>" +
+        "<td>" + esc(c.note) + (c.tip ? " <i>" + esc(c.tip) + "</i>" : "") + "</td></tr>";
+    });
+    out += "</table></div>";
+  });
+  document.getElementById("tables").innerHTML = out;
+});
+</script>
+</body>
+</html>

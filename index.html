@@ -181,14 +181,15 @@
       var name = norm(c.name), aliases = c.aliases.map(norm), score = 0, via = "";
       if (name === t) score = 100;
       else if (name.indexOf(t) === 0) score = 80;
+      else if (name.indexOf(t) !== -1) score = 60;
       else {
+        // Only show the nickname that matched when the name itself didn't.
         aliases.forEach(function (a, i) {
           var s = a === t ? 90 : a.indexOf(t) === 0 ? 70 : a.indexOf(t) !== -1 ? 40 : 0;
           if (s > score) { score = s; via = c.aliases[i]; }
         });
-        if (!score && name.indexOf(t) !== -1) score = 50;
       }
-      if (score) scored.push({ c: c, score: score, via: score < 80 || name.indexOf(t) !== 0 ? via : "" });
+      if (score) scored.push({ c: c, score: score, via: via });
     });
     return scored.sort(function (a, b) { return b.score - a.score || a.c.name.localeCompare(b.c.name); }).slice(0, 8);
   }
