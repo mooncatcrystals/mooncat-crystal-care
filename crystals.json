@@ -4,7 +4,7 @@
     { "name": "Amethyst", "aliases": ["chevron amethyst", "amethyst cluster", "amethyst geode"], "water": "rinse", "sun": "fades", "fragility": "sturdy", "hardness": "7",
       "note": "Its purple can fade with long sun exposure, so keep it out of sunny windows. Avoid hot water and sudden temperature changes, which can crack it.", "shop": "amethyst-collection" },
     { "name": "Citrine", "aliases": ["madeira citrine"], "water": "rinse", "sun": "fades", "fragility": "sturdy", "hardness": "7",
-      "note": "Much of the citrine sold today is heat-treated amethyst, and its color can fade in strong sun. Keep it out of sunny windows to protect the color.", "shop": "citrine" },
+      "note": "Citrine's color can fade with long exposure to strong sun, so keep it out of sunny windows.", "shop": "citrine" },
     { "name": "Clear Quartz", "aliases": ["quartz", "rock crystal", "lemurian quartz", "brazilian quartz", "quartz point"], "water": "rinse", "sun": "safe", "fragility": "sturdy", "hardness": "7",
       "note": "Very easy to care for. One real safety note: clear quartz spheres and points can focus sunlight like a magnifying glass, so don't leave them in a sunny window near fabric, paper or wood.", "shop": "quartz-1" },
     { "name": "Rose Quartz", "aliases": ["star rose quartz", "aura rose quartz"], "water": "rinse", "sun": "fades", "fragility": "sturdy", "hardness": "7",
