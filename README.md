@@ -9,4 +9,4 @@ Free public lookup at care.mooncatcrystals.com: type a crystal, see how to clean
 
 Hosting: Cloudflare Pages (no build command, output `/`), env vars `FLODESK_API_KEY` (secret) and `FLODESK_SEGMENT_CARE`.
 
-Care rules: water is only for cleaning off dust, and only for quartz-family stones; cleansing = selenite plate (several hours or overnight), sound, smoke, intention (never moonlight or water). Calm tone; handling tips, never scare copy. Lean cautious when sources disagree.
+Care rules: water is only for cleaning off dust, and only for quartz-family stones; cleansing = selenite plate (several hours or overnight), sound, smoke, intention (never moonlight or water). Calm tone; handling tips, never scare copy. Universal note is a light 'Common sense reminder', not a lecture. Lean cautious when sources disagree.
