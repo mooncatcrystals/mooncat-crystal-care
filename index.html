@@ -6,8 +6,21 @@
 <title>Crystal Care Guide | Mooncat Crystals</title>
 <meta name="description" content="Can your crystal get wet? Will it fade in the sun? Look up any crystal and see exactly how to clean, store and cleanse it.">
 <link rel="icon" href="https://www.mooncatcrystals.com/cdn/shop/files/Untitled_design_4.avif?v=1771447662&width=96">
+<script>
+  // Light/dark matches the Crystal Skool dashboard: same "crystalskool-theme"
+  // key and default. The dashboard links here with ?theme=light|dark because
+  // separate sites can't read each other's saved settings.
+  (function () {
+    var t = null;
+    try { t = new URLSearchParams(location.search).get("theme"); } catch (e) {}
+    if (t !== "light" && t !== "dark") { try { t = localStorage.getItem("crystalskool-theme"); } catch (e) {} }
+    if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
 <style>
-  /* Same palette and type as the Find Your Crystal quiz. */
+  /* Same palette and type as the Find Your Crystal quiz (dark), and the
+     Crystal Skool dashboard's light theme. */
   :root {
     --cream: #ece2da;
     --cream-text: #1c1c1c;
@@ -23,6 +36,25 @@
     --mid: #8a6420;
     --mid-bg: #f5ead2;
     --shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.55);
+    --page-bg: #000000;
+    --page-ink: #e5cbb3;
+    --page-muted: rgba(229, 203, 179, 0.75);
+    --card: #ece2da;
+    --box: #ffffff;
+    --box-border: transparent;
+    --field: #ffffff;
+    --toggle-bg: #ece2da;
+  }
+  [data-theme="light"] {
+    --page-bg: #f7f1ea;
+    --page-ink: #1c1610;
+    --page-muted: rgba(28, 22, 16, 0.65);
+    --card: #ffffff;
+    --box: #f7f1ea;
+    --box-border: #ddd0c4;
+    --field: #ffffff;
+    --toggle-bg: #ffffff;
+    --shadow: 0 18px 40px -24px rgba(28, 22, 16, 0.25);
   }
   * { box-sizing: border-box; }
   @font-face {
@@ -31,7 +63,7 @@
     font-weight: 400; font-style: normal; font-display: swap;
   }
   body {
-    margin: 0; background: #000; color: var(--tan);
+    margin: 0; background: var(--page-bg); color: var(--page-ink);
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     min-height: 100vh; display: flex; justify-content: center; padding: 36px 16px 70px;
   }
@@ -39,7 +71,7 @@
   .wrap { width: 100%; max-width: 620px; }
   .brand { text-align: center; margin-bottom: 26px; }
   .brand img { height: 62px; width: auto; }
-  .card { background: var(--cream); color: var(--cream-text); border-radius: 20px; box-shadow: var(--shadow); padding: 38px 32px; }
+  .card { background: var(--card); color: var(--cream-text); border-radius: 20px; box-shadow: var(--shadow); padding: 38px 32px; }
   .eyebrow { text-align: center; font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--purple); font-weight: 700; margin-bottom: 10px; }
   h1 { text-align: center; font-size: 30px; line-height: 1.25; margin-bottom: 12px; }
   .intro { text-align: center; color: var(--text-soft); font-size: 15px; line-height: 1.6; margin: 0 auto 24px; max-width: 460px; }
@@ -47,7 +79,7 @@
   .search { position: relative; }
   .search input {
     width: 100%; font: inherit; font-size: 16px; padding: 15px 18px; border-radius: 14px;
-    border: 2px solid rgba(28, 28, 28, 0.15); background: #fff; color: var(--cream-text);
+    border: 2px solid rgba(28, 28, 28, 0.15); background: var(--field); color: var(--cream-text);
   }
   .search input:focus { outline: none; border-color: var(--pink); }
   .suggest { list-style: none; margin: 6px 0 0; padding: 6px; background: #fff; border-radius: 14px; box-shadow: 0 12px 30px -12px rgba(0,0,0,0.25); position: absolute; left: 0; right: 0; z-index: 5; max-height: 320px; overflow-y: auto; }
@@ -55,7 +87,7 @@
   .suggest li .alias { color: var(--text-soft); font-size: 13px; }
   .suggest li[aria-selected="true"], .suggest li:hover { background: var(--cream); }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0 4px; }
-  .chip { font: inherit; font-size: 13.5px; border: 1px solid rgba(28,28,28,0.15); background: #fff; color: var(--cream-text); border-radius: 999px; padding: 7px 13px; cursor: pointer; }
+  .chip { font: inherit; font-size: 13.5px; border: 1px solid rgba(28,28,28,0.15); background: var(--field); color: var(--cream-text); border-radius: 999px; padding: 7px 13px; cursor: pointer; }
   .chip:hover { border-color: var(--purple); }
   .chip:focus-visible, .search input:focus-visible, .btn:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
   .browse { margin: 12px 0 0; text-align: center; }
@@ -64,7 +96,7 @@
   .browse summary::-webkit-details-marker { display: none; }
   .browse .caret::after { content: "▾"; text-decoration: none; display: inline-block; }
   .browse[open] .caret::after { content: "▴"; }
-  .browse-panel { position: relative; margin-top: 12px; background: #fff; border-radius: 14px; padding: 40px 16px 14px; }
+  .browse-panel { position: relative; margin-top: 12px; background: var(--box); border: 1px solid var(--box-border); border-radius: 14px; padding: 40px 16px 14px; }
   .browse-close { position: absolute; top: 6px; right: 8px; width: 36px; height: 36px; border: none; background: none; font-size: 26px; line-height: 1; color: var(--text-soft); cursor: pointer; border-radius: 50%; }
   .browse-close:hover { background: var(--cream); color: var(--cream-text); }
   .browse-close:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
@@ -82,7 +114,7 @@
   .badge.ok { background: var(--ok-bg); color: var(--ok); }
   .badge.no { background: var(--no-bg); color: var(--no); }
   .badge.mid { background: var(--mid-bg); color: var(--mid); }
-  .box { background: #fff; border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
+  .box { background: var(--box); border: 1px solid var(--box-border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
   .box strong { display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-soft); margin-bottom: 6px; }
   .box p { margin: 0; font-size: 15px; line-height: 1.6; }
   .warn-box { border: 2px solid var(--mid-bg); }
@@ -97,7 +129,7 @@
   .habits { margin-top: 26px; padding-top: 20px; border-top: 1px solid rgba(28,28,28,0.12); font-size: 14px; line-height: 1.6; color: var(--text-soft); }
   .habits b { color: var(--cream-text); }
 
-  .signup { background: #fff; border-radius: 14px; padding: 20px; margin-top: 22px; }
+  .signup { background: var(--box); border: 1px solid var(--box-border); border-radius: 14px; padding: 20px; margin-top: 22px; }
   .signup h3 { font-size: 19px; margin-bottom: 6px; }
   .signup p { font-size: 14.5px; line-height: 1.55; margin: 0 0 12px; color: var(--cream-text); }
   .signup form { display: flex; flex-direction: column; gap: 8px; }
@@ -110,8 +142,15 @@
   .form-msg.err { color: var(--no); }
   .form-msg.ok { color: var(--ok); font-weight: 600; }
 
-  .disclaimer { margin-top: 26px; font-size: 12.5px; line-height: 1.6; color: rgba(229, 203, 179, 0.75); text-align: center; }
-  .disclaimer a { color: var(--tan); }
+  .disclaimer { margin-top: 26px; font-size: 12.5px; line-height: 1.6; color: var(--page-muted); text-align: center; }
+  .disclaimer a { color: var(--page-ink); }
+
+  /* Same moon/sun toggle as the Crystal Skool dashboard. */
+  .theme-toggle { position: fixed; top: 16px; right: 16px; z-index: 20; display: flex; gap: 4px; background: var(--toggle-bg); border: 1px solid rgba(28, 22, 16, 0.12); border-radius: 999px; padding: 5px; }
+  .theme-toggle button { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; color: rgba(28, 22, 16, 0.65); }
+  .theme-toggle button.active { background: var(--pink); color: #1c1610; }
+  .theme-toggle button:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+  .theme-toggle svg { width: 15px; height: 15px; }
   [hidden] { display: none !important; }
   @media (max-width: 480px) {
     .card { padding: 30px 20px; border-radius: 18px; }
@@ -121,6 +160,10 @@
 </style>
 </head>
 <body>
+<div class="theme-toggle" role="group" aria-label="Light or dark mode">
+  <button type="button" id="btn-dark" aria-label="Dark mode"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg></button>
+  <button type="button" id="btn-light" aria-label="Light mode"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+</div>
 <div class="wrap">
   <div class="brand">
     <a href="https://www.mooncatcrystals.com"><img src="https://www.mooncatcrystals.com/cdn/shop/files/logo-mooncat.png?v=1729612271&width=200" alt="Mooncat Crystals"></a>
@@ -178,6 +221,20 @@
 </div>
 
 <script>
+(function () {
+  var darkBtn = document.getElementById("btn-dark"), lightBtn = document.getElementById("btn-light");
+  function setTheme(t, save) {
+    document.documentElement.setAttribute("data-theme", t);
+    darkBtn.classList.toggle("active", t === "dark");
+    lightBtn.classList.toggle("active", t === "light");
+    darkBtn.setAttribute("aria-pressed", t === "dark");
+    lightBtn.setAttribute("aria-pressed", t === "light");
+    if (save) { try { localStorage.setItem("crystalskool-theme", t); } catch (e) {} }
+  }
+  darkBtn.addEventListener("click", function () { setTheme("dark", true); });
+  lightBtn.addEventListener("click", function () { setTheme("light", true); });
+  setTheme(document.documentElement.getAttribute("data-theme") || "dark", false);
+})();
 (function () {
   var POPULAR = ["Amethyst", "Rose Quartz", "Selenite", "Clear Quartz", "Black Tourmaline", "Citrine", "Labradorite", "Fluorite", "Pyrite", "Malachite"];
   var SHOP = "https://www.mooncatcrystals.com";
@@ -283,7 +340,7 @@
     shop.href = c.shop ? SHOP + "/collections/" + c.shop : SHOP + "/search?q=" + encodeURIComponent(c.name);
     shop.textContent = "Shop " + c.name + " →";
     document.getElementById("result").hidden = false;
-    try { history.replaceState(null, "", "?c=" + encodeURIComponent(c.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"))); } catch (e) {}
+    try { var sp = new URLSearchParams(location.search); sp.set("c", slug(c.name)); history.replaceState(null, "", "?" + sp.toString()); } catch (e) {}
     document.getElementById("result").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
